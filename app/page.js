@@ -1,12 +1,16 @@
 "use client";
+
 import { list } from 'postcss';
 import React, { useState } from 'react';
 
+// Define the Page component
 function Page(props) {
+  // Define state variables using the useState hook
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [mainTask, setMainTask] = useState([]);
 
+  // Define the submitHandler function
   const submitHandler = (e) => {
     e.preventDefault();
     setMainTask([...mainTask, { title, desc }]);
@@ -15,24 +19,37 @@ function Page(props) {
     setDesc('');
   };
 
-  let renderTask = <h2> No task Available</h2>;
+  // Initialize the renderTask variable
+  let renderTask = <h2 className='text-lg text-lime-600'>Lets organize our tasks</h2>;
 
+  // Define the deleteHandler function
+  const deleteHandler = (index) => {
+    let copyTask = [...mainTask];
+    copyTask.splice(index, 1);
+    setMainTask(copyTask);
+  };
+
+  // Check if there are tasks in the mainTask array
   if (mainTask.length > 0) {
+    // Map through the mainTask array and render each task
     renderTask = mainTask.map((task, index) => {
       return (
-        <li key={index} className='flex items-center justify-between mb-4'>
-          <div className='flex items-center justify-between w-2/3'>
-            <h5 className='text-2x1 font-semibold'>{task.title}</h5>
-            <h6 className='text-xl font-medium'>{task.desc}</h6>
+        <li key={index} className='flex items-center justify-between mb-1 mt-1'>
+          <div className='flex items-center justify-between w-2/3 mt-2 mb-2'>
+            <h5 className='text-2xl font-semibold'>{task.title}</h5>
+            <h6 className='text-lg font-medium'>{task.desc}</h6>
           </div>
-          <button className='bg-red-400 text-white px-4 py-2 rounded font-bold'>
-            Delete
+          <button
+            onClick={() => { deleteHandler(index)}}
+            className='bg-red-400 text-white px-3 py-1.5 rounded font-bold'>
+              Delete
           </button>
         </li>
       );
     });
   }
 
+  // Render the Page component
   return (
     <div>
       <h1 className='bg-black text-white p-5 text-5xl font-bold text-center'>
@@ -62,13 +79,15 @@ function Page(props) {
         </button>
       </form>
       <hr />
-      <div className='p-8 bg-slate-200'>
+      <div className='p-8 bg-slate-300'>
         <ul>{renderTask}</ul>
       </div>
     </div>
   );
 }
 
+// Define the prop types for the Page component
 Page.propTypes = {};
 
+// Export the Page component as the default export
 export default Page;
