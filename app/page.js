@@ -49,16 +49,16 @@ function Page(props) {
     });
   }
 
-  // Render the Page component
+  
   return (
-    <div>
-      <h1 className='bg-black text-white p-5 text-5xl font-bold text-center'>
+    <div className='bg-gray-100 min-h-screen'>
+      <h1 className='bg-blue-500 text-white p-5 text-5xl font-bold text-center'>
         ToDoList
       </h1>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className='max-w-md mx-auto bg-white rounded p-5 shadow-md'>
         <input
           type='text'
-          className='text-2xl border-zinc-800 border-4 m-8 px-4 py-2'
+          className='w-full border-gray-300 border-2 rounded p-2 mb-4'
           placeholder='Add a new task'
           value={title}
           onChange={(e) => {
@@ -67,25 +67,25 @@ function Page(props) {
         />
         <input
           type='text'
-          className='text-2xl border-zinc-800 border-4 m-8 px-4 py-2'
+          className='w-full border-gray-300 border-2 rounded p-2 mb-4'
           placeholder='Add Description'
           value={desc}
           onChange={(e) => {
             setDesc(e.target.value);
           }}
         />
-        <button className='bg-black text-white px-4 py-3 text-2xl font-bold rounded m-5'>
+        <button className='w-full bg-blue-500 text-white py-2 text-2xl font-bold rounded'>
           Add
         </button>
       </form>
-      <hr />
-      <div className='p-8 bg-slate-300'>
+      <hr className='my-5' />
+      <div className='max-w-md mx-auto bg-white rounded p-5 shadow-md'>
         <ul>{renderTask}</ul>
       </div>
     </div>
   );
 }
-
+  
 // Define the prop types for the Page component
 Page.propTypes = {};
 
